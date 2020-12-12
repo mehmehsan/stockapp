@@ -1,6 +1,48 @@
 import React, { useState } from "react";
 import "./styles.css";
 
+const allStockes = {
+  ALL: [
+    { stockee: "MARICO", rate: "9/10" },
+    { stockee: "ITC", rate: " 9/10 " },
+    { stockee: "INFOSYS", rate: " 9.5/10 " },
+    { stockee: "WIPRO", rate: "8.5/10 " },
+    { stockee: "DIVISLAB", rate: " 8.5/10 " },
+    { stockee: "ASTRAZENCA", rate: "7.5/10 " },
+    { stockee: "HDFC", rate: " 8.5 /10 " }
+  ],
+
+  FMCG: [
+    { stockee: "MARICO ", rate: " 9/10 " },
+    { stockee: "ITC ", rate: " 9/10 " }
+  ],
+
+  IT: [
+    { stockee: "INFOSYS", rate: " 9.5/10 " },
+    { stockee: "WIPRO", rate: "8.5/10 " }
+  ],
+
+  PHARMA: [
+    { stockee: "DIVISLAB", rate: " 8.5/10 " },
+    { stockee: "ASTRAZENCA", rate: "7.5/10 " }
+  ],
+
+  FINANCE: [
+    { stockee: "HDFC", rate: " 8.5 /10 " },
+    { stockee: "BAJAJFIN", rate: "9.5/10 " }
+  ],
+
+  OG: [
+    { stockee: "INDRAPRASTHA GAS", rate: "7/10 " },
+    { stockee: "RELIANCE", rate: "8/10 " }
+  ],
+
+  OTHERS: [
+    { stockee: "RELAXO", rate: "7.5/10 " },
+    { stockee: "BERGER", rate: "8.5/10" }
+  ]
+};
+
 const allStocks = {
   ALL: [
     "MARICO : 9/10 ",
@@ -23,15 +65,15 @@ const allStocks = {
   OTHERS: ["RELAXO : 7.5/10 ", "BERGER : 8.5/10"]
 };
 
-var setShare = Object.keys(allStocks);
+var setSharee = Object.keys(allStockes);
 
 export default function App() {
-  const [nStock, currentStock] = useState("");
-  const [nRate, currentRate] = useState("");
-  function clickStocks(stock) {
-    var nStock = allStocks[stock];
-    currentStock(nStock);
+  const [nStocke, currentStocke] = useState("ALL");
+
+  function clickStockes(stocke) {
+    currentStocke(stocke);
   }
+
   return (
     <div className="App">
       <svg
@@ -100,22 +142,43 @@ export default function App() {
         </g>
       </svg>
       <h1>Stocks Analysis App</h1>
-      <hr></hr>
-
-      {setShare.map(function (stock) {
+      <hr />
+      {setSharee.map((stocke) => {
         return (
           <button
             className="btn"
-            onClick={() => clickStocks(stock)}
+            onClick={() => clickStockes(stocke)}
+            key={stocke}
             style={{ cursor: "pointer", padding: ".5rem", margin: ".5rem" }}
           >
-            {" "}
-            {stock}{" "}
+            {stocke}
           </button>
         );
       })}
+      <hr />
+
+      <ul>
+        {allStockes[nStocke].map((stocke) => {
+          return (
+            <li
+              key={stocke.stockee}
+              style={{
+                backgroundColor: "lightgray",
+                padding: "1rem 1rem",
+                textAlign: "left",
+                margin: "1rem",
+                borderRadius: "0.5rem",
+                listStyle: "none"
+              }}
+            >
+              <div> {stocke.stockee} </div>
+              <div> {stocke.rate}</div>
+            </li>
+          );
+        })}
+      </ul>
+
       <hr></hr>
-      <h3 style={{ border: "solid black" }}>{nStock}</h3>
     </div>
   );
 }
